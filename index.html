@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="apple-touch-icon" href="https://augustineiacopelli.github.io/appaday/icons/162.png">
+<meta name="apple-mobile-web-app-title" content="Discernment">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="manifest" href="https://augustineiacopelli.github.io/appaday/manifests/162.webmanifest">
+<script src="https://augustineiacopelli.github.io/appaday/save.js" defer></script>
+<meta name="description" content="Log the interior movements of a retreat as consolation or desolation using the Ignatian Rules for the Discernment of Spirits. Private and offline.">
+<meta name="theme-color" content="#6A4C93">
+<title>Consolation Journal | AppADay 162</title>
+<style>
+:root{
+  --purple:#6A4C93; --purple-dk:#523A73; --paper:#F6F1E7; --ink:#2B2620;
+  --gold:#C9A227; --gold-soft:#F3E7BF; --slate:#55627A; --slate-soft:#DDE2EA;
+  --card:#FFFDF8; --line:#E3DACB; --muted:#665D53; --danger:#9B2C2C;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100dvh;display:flex;flex-direction:column;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.45;overflow-x:hidden}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+
+header.top{background:var(--purple);color:#fff;display:flex;align-items:center;gap:.6rem;padding:calc(.5rem + env(safe-area-inset-top)) max(1rem,env(safe-area-inset-right)) .5rem max(1rem,env(safe-area-inset-left))}
+.num{font-family:var(--sans);font-size:.75rem;font-weight:700;letter-spacing:.06em;background:rgba(255,255,255,.18);border-radius:999px;padding:.2rem .55rem}
+.top h1{margin:0;font-size:1.2rem;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top a,.iconbtn{color:#fff;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-family:var(--sans);font-size:.85rem;border-radius:10px}
+.iconbtn{background:transparent;border:1px solid rgba(255,255,255,.35);font-size:1.25rem}
+.top a{padding:0 .35rem}
+.top a:hover,.iconbtn:hover{background:rgba(255,255,255,.12)}
+
+main{flex:1;width:100%;max-width:680px;margin:0 auto;padding:1rem max(1rem,env(safe-area-inset-left)) 2rem;display:flex;flex-direction:column;gap:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1rem;box-shadow:0 1px 2px rgba(43,38,32,.05)}
+.card h2{margin:0 0 .75rem;font-size:1.15rem;font-weight:600}
+.label{display:block;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 .4rem}
+.lede{margin:-.35rem 0 .9rem;color:var(--muted);font-size:.95rem}
+
+.kinds{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.kind{position:relative;min-height:88px;text-align:left;border-radius:12px;border:2px solid var(--line);background:#fff;padding:.7rem .75rem .7rem .8rem;display:flex;flex-direction:column;gap:.25rem}
+.kind strong{font-size:1.05rem;padding-right:1.6rem}
+.kind small{font-size:.8rem;line-height:1.35;color:var(--muted)}
+.kind .chk{position:absolute;top:.5rem;right:.55rem;width:1.5rem;height:1.5rem;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:.85rem;font-weight:700;color:transparent}
+.kind.c{border-left:6px solid var(--gold)}
+.kind.d{border-left:6px solid var(--slate)}
+.kind.c[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.kind.c[aria-pressed="true"] small{color:var(--ink)}
+.kind.d[aria-pressed="true"]{background:var(--slate);border-color:var(--slate);color:#fff}
+.kind.d[aria-pressed="true"] small{color:#EEF1F5}
+.kind[aria-pressed="true"] .chk{border-color:currentColor;color:inherit;background:rgba(255,255,255,.25)}
+
+.row{display:flex;gap:.5rem;align-items:stretch}
+.field{margin-top:1rem}
+input[type=datetime-local]{flex:1;min-width:0;min-height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:.4rem .6rem;font-family:var(--sans);font-size:1rem}
+textarea{width:100%;min-height:96px;resize:vertical;border:1px solid var(--line);border-radius:10px;background:#fff;padding:.6rem .7rem;font-size:1rem;line-height:1.4}
+.counter{font-family:var(--sans);font-size:.78rem;color:var(--muted);text-align:right;margin-top:.25rem}
+.counter.near{color:var(--danger)}
+
+.btn{min-height:44px;border-radius:10px;border:1px solid var(--line);background:#fff;padding:.5rem 1rem;font-family:var(--sans);font-size:.95rem;font-weight:600}
+.btn:hover{border-color:var(--purple)}
+.btn.primary{background:var(--purple);border-color:var(--purple);color:#fff}
+.btn.primary:hover{background:var(--purple-dk)}
+.btn.primary:disabled{background:#B9AECB;border-color:#B9AECB;color:#fff;cursor:not-allowed}
+.btn.danger{color:var(--danger);border-color:#E7C7C7}
+.btn.block{width:100%;margin-top:1rem;font-size:1.05rem;min-height:52px}
+
+.pairs{display:flex;flex-direction:column;gap:.75rem}
+.pair .q{font-size:.95rem;margin:0 0 .35rem}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.seg button{min-height:44px;border:0;background:transparent;font-family:var(--sans);font-size:.92rem;padding:.4rem .5rem}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--purple);color:#fff;font-weight:600}
+.hint{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin:.6rem 0 0}
+
+.rule5{margin-top:1rem;border-radius:12px;padding:.8rem .9rem;background:#F1ECF7;border:1px solid #DCD2EA;transition:background .2s,border-color .2s}
+.rule5 h3{margin:0 0 .25rem;font-size:.98rem;font-family:var(--sans);font-weight:700;color:var(--purple)}
+.rule5 p{margin:0;font-size:.95rem}
+.rule5.alert{background:var(--slate);border-color:var(--slate);color:#fff}
+.rule5.alert h3{color:#fff}
+.warn{display:none;margin-top:.6rem;background:#fff;color:var(--danger);border-radius:8px;padding:.55rem .65rem;font-family:var(--sans);font-size:.88rem;font-weight:600;border:1px solid #E7C7C7}
+.warn.show{display:block}
+.counsel{display:block;width:100%;text-align:left;margin-top:.75rem;min-height:44px;background:transparent;border:1px dashed var(--line);border-radius:10px;padding:.6rem .75rem;font-style:italic;font-size:.95rem;color:var(--ink)}
+.counsel span{display:block;font-style:normal;font-family:var(--sans);font-size:.72rem;color:var(--muted);margin-top:.25rem}
+
+.daynav{display:flex;align-items:center;gap:.4rem;margin-bottom:.75rem}
+.daynav .dl{flex:1;text-align:center;font-weight:600;font-size:1rem;min-width:0}
+.daynav .btn{padding:.4rem .7rem}
+.ribbonwrap{position:relative;padding-bottom:1.4rem}
+.ribbon{display:flex;height:44px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:repeating-linear-gradient(135deg,#FBF8F1 0 6px,#F1EADD 6px 12px)}
+.seg-c,.seg-d,.seg-n{flex-basis:0;min-width:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:var(--sans);font-weight:700;font-size:.85rem}
+.seg-c{background:var(--gold);color:var(--ink)}
+.seg-d{background:var(--slate);color:#fff}
+.seg-c+.seg-c,.seg-d+.seg-d,.seg-c+.seg-d,.seg-d+.seg-c{box-shadow:inset 2px 0 0 rgba(255,255,255,.7)}
+.ticks{position:absolute;left:0;right:0;top:44px;height:1.4rem}
+.tick{position:absolute;top:2px;width:1px;height:5px;background:var(--muted)}
+.tick.major{height:8px}
+.tlab{position:absolute;top:10px;font-family:var(--sans);font-size:.7rem;color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+.tlab.first{transform:none}
+.tlab.last{transform:translateX(-100%)}
+.legend{display:flex;flex-wrap:wrap;gap:.9rem;font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.5rem}
+.legend i{display:inline-block;width:.8rem;height:.8rem;border-radius:3px;vertical-align:-1px;margin-right:.3rem}
+.empty{text-align:center;color:var(--muted);font-style:italic;padding:1rem .5rem 0;margin:0}
+
+.list{list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.entry{display:flex;gap:.65rem;align-items:flex-start;border:1px solid var(--line);border-radius:12px;background:#fff;padding:.65rem .65rem .65rem .75rem}
+.entry.c{border-left:6px solid var(--gold)}
+.entry.d{border-left:6px solid var(--slate)}
+.entry .body{flex:1;min-width:0}
+.entry .meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-family:var(--sans);font-size:.85rem}
+.badge{font-weight:700;border-radius:6px;padding:.1rem .45rem;font-size:.78rem}
+.badge.c{background:var(--gold);color:var(--ink)}
+.badge.d{background:var(--slate);color:#fff}
+.entry .txt{margin:.35rem 0 0;overflow-wrap:anywhere;white-space:pre-wrap}
+.entry .txt.none{color:var(--muted);font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.45rem}
+.chip{font-family:var(--sans);font-size:.75rem;border:1px solid var(--line);border-radius:999px;padding:.12rem .55rem;background:var(--paper)}
+.chip.caution{background:#FBEAEA;border-color:#E7C7C7;color:var(--danger);font-weight:600}
+.del{min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--muted);font-family:var(--sans);font-size:1.2rem;line-height:1}
+.del:hover{color:var(--danger);border-color:#E7C7C7}
+
+footer{text-align:center;padding:1rem 1rem calc(1rem + env(safe-area-inset-bottom));font-family:var(--sans);font-size:.85rem;color:var(--muted)}
+footer a{color:var(--purple);display:inline-flex;align-items:center;min-height:44px;padding:0 .5rem}
+
+.scrim{position:fixed;inset:0;background:rgba(43,38,32,.5);display:none;align-items:flex-end;justify-content:center;z-index:50;padding:0}
+.scrim.open{display:flex}
+.panel{background:var(--card);width:100%;max-width:560px;max-height:88dvh;overflow-y:auto;border-radius:18px 18px 0 0;padding:1.1rem 1.1rem calc(1.2rem + env(safe-area-inset-bottom));box-shadow:0 -6px 24px rgba(0,0,0,.18)}
+@media(min-width:640px){.scrim{align-items:center;padding:1rem}.panel{border-radius:18px}}
+.panel h2{margin:0 0 .5rem;font-size:1.2rem}
+.panel h3{margin:1.1rem 0 .4rem;font-size:1rem;font-family:var(--sans);color:var(--purple)}
+.panel p{margin:.4rem 0;font-size:.95rem}
+.phead{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.phead .x{min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:1.2rem}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+.btns .btn{flex:1 1 140px}
+.sheet .btns{flex-direction:column}
+.sheet .btns .btn{flex:none;width:100%}
+.small{font-family:var(--sans);font-size:.8rem;color:var(--muted)}
+
+.toast{position:fixed;left:50%;bottom:calc(1.2rem + env(safe-area-inset-bottom));transform:translate(-50%,150%);background:var(--ink);color:#fff;font-family:var(--sans);font-size:.9rem;padding:.65rem 1rem;border-radius:999px;opacity:0;transition:transform .25s,opacity .25s;z-index:80;max-width:calc(100vw - 2rem);text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="num">162</span>
+  <h1>Consolation Journal</h1>
+  <button class="iconbtn" id="gearBtn" type="button" aria-label="Settings, export and about">&#9881;</button>
+  <a href="https://augustineiacopelli.github.io/appaday/">Portfolio</a>
+</header>
+
+<main>
+  <section class="card" aria-labelledby="capH">
+    <h2 id="capH">Notice a movement</h2>
+    <p class="lede">Name what stirred in you, then what came just before it.</p>
+    <span class="label" id="kindLbl">This movement is</span>
+    <div class="kinds" role="group" aria-labelledby="kindLbl">
+      <button type="button" class="kind c" data-kind="consolation" aria-pressed="false">
+        <span class="chk" aria-hidden="true">&#10003;</span>
+        <strong>Consolation</strong>
+        <small>Rule 3: love of God kindled, tears, any increase of faith, hope and charity, quiet and peace in Him.</small>
+      </button>
+      <button type="button" class="kind d" data-kind="desolation" aria-pressed="false">
+        <span class="chk" aria-hidden="true">&#10003;</span>
+        <strong>Desolation</strong>
+        <small>Rule 4: darkness, turmoil, a pull toward low things, restlessness, loss of hope and love, feeling apart from God.</small>
+      </button>
+    </div>
+
+    <div class="field">
+      <label class="label" for="when">When</label>
+      <div class="row">
+        <input type="datetime-local" id="when">
+        <button type="button" class="btn" id="nowBtn">Now</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label" for="before">What happened just before</label>
+      <textarea id="before" maxlength="280" placeholder="A conversation, a passage in prayer, a memory, a thought that arrived..."></textarea>
+      <div class="counter" id="counter" aria-live="polite">0 / 280</div>
+    </div>
+
+    <div class="field">
+      <span class="label">Discernment (optional)</span>
+      <div class="pairs">
+        <div class="pair">
+          <p class="q" id="q1">Where is this movement leading?</p>
+          <div class="seg" role="group" aria-labelledby="q1" data-field="toward">
+            <button type="button" data-v="toward" aria-pressed="false">Toward God</button>
+            <button type="button" data-v="away" aria-pressed="false">Away from God</button>
+          </div>
+        </div>
+        <div class="pair">
+          <p class="q" id="q2">What does it leave behind?</p>
+          <div class="seg" role="group" aria-labelledby="q2" data-field="tone">
+            <button type="button" data-v="peace" aria-pressed="false">Peace</button>
+            <button type="button" data-v="agitation" aria-pressed="false">Agitation</button>
+          </div>
+        </div>
+        <div class="pair">
+          <p class="q" id="q3">Is this a time to</p>
+          <div class="seg" role="group" aria-labelledby="q3" data-field="season">
+            <button type="button" data-v="decide" aria-pressed="false">Decide</button>
+            <button type="button" data-v="steady" aria-pressed="false">Hold steady</button>
+          </div>
+        </div>
+      </div>
+      <p class="hint">Tap a choice again to clear it.</p>
+
+      <div class="rule5" id="rule5" aria-live="polite">
+        <h3 id="r5h">Rule 5: in desolation, make no change</h3>
+        <p id="r5p">When desolate, do not alter a resolution or make a new decision. Stand firm in what you chose before the desolation, or in the last time of consolation.</p>
+        <div class="warn" id="r5warn">Desolation and Decide are both marked. Rule 5 counsels you to hold steady: postpone this decision and bring it to prayer or to your director.</div>
+      </div>
+
+      <button type="button" class="counsel" id="counsel" aria-live="polite"></button>
+    </div>
+
+    <button type="button" class="btn primary block" id="saveBtn" disabled>Save movement</button>
+  </section>
+
+  <section class="card" aria-labelledby="dayH">
+    <h2 id="dayH">Your day</h2>
+    <div class="daynav">
+      <button type="button" class="btn" id="prevBtn" aria-label="Previous day">&#8249; Prev</button>
+      <div class="dl" id="dayLabel" aria-live="polite"></div>
+      <button type="button" class="btn" id="nextBtn" aria-label="Next day">Next &#8250;</button>
+    </div>
+    <div class="daynav" style="margin-top:-.25rem">
+      <button type="button" class="btn" id="todayBtn" style="margin:0 auto">Today</button>
+    </div>
+    <div class="ribbonwrap" id="ribbonWrap">
+      <div class="ribbon" id="ribbon" role="img" aria-label="Timeline of the day"></div>
+      <div class="ticks" id="ticks" aria-hidden="true"></div>
+    </div>
+    <div class="legend" aria-hidden="true">
+      <span><i style="background:var(--gold)"></i>C Consolation</span>
+      <span><i style="background:var(--slate)"></i>D Desolation</span>
+      <span><i style="background:repeating-linear-gradient(135deg,#FBF8F1 0 3px,#E6DCCB 3px 6px);border:1px solid var(--line)"></i>Not yet noticed</span>
+    </div>
+    <p class="empty" id="emptyMsg">No movements logged this day.</p>
+    <ul class="list" id="list"></ul>
+  </section>
+</main>
+
+<footer>
+  AppADay 162 &middot; <a href="https://augustineiacopelli.github.io/appaday/">Back to the portfolio</a>
+</footer>
+
+<div class="scrim" id="gearScrim">
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="gearH">
+    <div class="phead">
+      <h2 id="gearH">Journal settings</h2>
+      <button type="button" class="x" id="gearClose" aria-label="Close settings">&#215;</button>
+    </div>
+    <h3>Backup</h3>
+    <p class="small" id="countLine"></p>
+    <div class="btns">
+      <button type="button" class="btn" id="exportBtn">Export JSON</button>
+      <button type="button" class="btn" id="importBtn">Import JSON</button>
+    </div>
+    <input type="file" id="importFile" accept=".json,application/json" class="sr" tabindex="-1" aria-hidden="true">
+    <div class="btns">
+      <button type="button" class="btn danger" id="clearBtn">Clear all entries</button>
+    </div>
+    <h3>About</h3>
+    <p>This journal draws on the Rules for the Discernment of Spirits in the Spiritual Exercises of St. Ignatius of Loyola, chiefly the rules for the First Week. Rules 3 and 4 describe consolation and desolation, Rule 5 warns against changes made in desolation, Rules 6 to 8 counsel how to stand in desolation, and Rules 10 and 11 counsel how to receive consolation.</p>
+    <p>Discernment is best done in company. If you are on retreat or making a serious choice, bring these notes to a spiritual director rather than reading them alone.</p>
+    <h3>Privacy</h3>
+    <p>Everything stays in this browser on this device. Nothing is sent anywhere, and there is no account. Export a backup if you want to keep your entries.</p>
+  </div>
+</div>
+
+<div class="scrim" id="sheetScrim">
+  <div class="panel sheet" role="alertdialog" aria-modal="true" aria-labelledby="sheetH" aria-describedby="sheetP">
+    <h2 id="sheetH"></h2>
+    <p id="sheetP"></p>
+    <div class="btns" id="sheetBtns"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+  var KEY = 'appaday-162-journal';
+  var KINDS = {consolation:1, desolation:1};
+  var FIELDS = {
+    toward: {toward:'Toward God', away:'Away from God'},
+    tone:   {peace:'Peace', agitation:'Agitation'},
+    season: {decide:'Decide', steady:'Hold steady'}
+  };
+  var COUNSEL = {
+    desolation: [
+      ['Rule 6', 'Do not drift. Lean in against the desolation with more prayer, more meditation, a closer examen, and some fitting penance.'],
+      ['Rule 7', 'You are being tested, not abandoned. Grace enough to resist remains with you even when you cannot feel it.'],
+      ['Rule 8', 'Work at patience. Consolation will return sooner than it seems, so keep using the means of Rule 6.']
+    ],
+    consolation: [
+      ['Rule 10', 'While in consolation, gather strength for the desolation that will come later.'],
+      ['Rule 11', 'Stay humble in consolation, remembering how little you can do without grace. In desolation, remember how much you can do with it.']
+    ],
+    none: [
+      ['Begin', 'Notice first, then name. What moved in you, and what came just before it?'],
+      ['Begin', 'Small movements count. A flicker of peace or a flash of irritation is worth a line.']
+    ]
+  };
+
+  /* ---------- storage ---------- */
+  var mem = {v:1, entries:[]};
+  var storageOk = true;
+  function readStore(){
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return {v:1, entries:[]};
+      var d = JSON.parse(raw);
+      var clean = sanitize(d);
+      return clean || {v:1, entries:[]};
+    } catch (e) { storageOk = false; return mem; }
+  }
+  function writeStore(){
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); storageOk = true; }
+    catch (e) { storageOk = false; mem = state; }
+  }
+  function sanitizeEntry(x){
+    if (!x || typeof x !== 'object') return null;
+    var ts = Number(x.ts);
+    if (!isFinite(ts) || ts <= 0) return null;
+    if (!KINDS[x.kind]) return null;
+    var e = {
+      id: (typeof x.id === 'string' && x.id) ? x.id.slice(0,40) : makeId(),
+      ts: Math.round(ts),
+      kind: x.kind,
+      before: typeof x.before === 'string' ? x.before.slice(0,280) : '',
+      toward: FIELDS.toward[x.toward] ? x.toward : null,
+      tone: FIELDS.tone[x.tone] ? x.tone : null,
+      season: FIELDS.season[x.season] ? x.season : null
+    };
+    return e;
+  }
+  function sanitize(d){
+    var arr = null;
+    if (Array.isArray(d)) arr = d;
+    else if (d && typeof d === 'object' && Array.isArray(d.entries)) arr = d.entries;
+    if (!arr) return null;
+    var out = [], seen = {};
+    for (var i = 0; i < arr.length; i++){
+      var e = sanitizeEntry(arr[i]);
+      if (e && !seen[e.id]){ seen[e.id] = 1; out.push(e); }
+    }
+    return {v:1, entries: out};
+  }
+  function makeId(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+
+  var state = readStore();
+
+  /* ---------- helpers ---------- */
+  function $(id){ return document.getElementById(id); }
+  function clear(node){ while (node.firstChild) node.removeChild(node.firstChild); }
+  function el(tag, cls, text){
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function startOfDay(d){ var x = new Date(d.getTime()); x.setHours(0,0,0,0); return x; }
+  function addDays(d, n){ var x = new Date(d.getTime()); x.setDate(x.getDate() + n); x.setHours(0,0,0,0); return x; }
+  function sameDay(a, b){ return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+  function toLocalInput(d){ return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+  function fromLocalInput(v){
+    var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(v || '');
+    if (!m) return null;
+    var d = new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5], 0, 0);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function fmtTime(d){
+    var h = d.getHours(), m = d.getMinutes(), ap = h < 12 ? 'AM' : 'PM';
+    var hh = h % 12; if (hh === 0) hh = 12;
+    return hh + ':' + pad(m) + ' ' + ap;
+  }
+  var DOW = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MON = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function fmtDay(d){ return DOW[d.getDay()] + ', ' + MON[d.getMonth()] + ' ' + d.getDate(); }
+  function hourLabel(h){ var hh = h % 12; if (hh === 0) hh = 12; return hh + (h % 24 < 12 ? 'a' : 'p'); }
+
+  var toastTimer = null;
+  function toast(msg){
+    var t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+
+  /* ---------- shared confirmation sheet ---------- */
+  var sheetResolve = null, sheetReturn = null;
+  function ask(title, body, buttons){
+    return new Promise(function(resolve){
+      sheetResolve = resolve;
+      sheetReturn = document.activeElement;
+      $('sheetH').textContent = title;
+      $('sheetP').textContent = body;
+      var box = $('sheetBtns');
+      clear(box);
+      buttons.forEach(function(b){
+        var btn = el('button', 'btn' + (b.style ? ' ' + b.style : ''), b.label);
+        btn.type = 'button';
+        btn.addEventListener('click', function(){ closeSheet(b.value); });
+        box.appendChild(btn);
+      });
+      $('sheetScrim').classList.add('open');
+      var first = box.querySelector('button');
+      if (first) first.focus();
+    });
+  }
+  function closeSheet(value){
+    $('sheetScrim').classList.remove('open');
+    var r = sheetResolve; sheetResolve = null;
+    if (sheetReturn && sheetReturn.focus) { try { sheetReturn.focus(); } catch (e) {} }
+    if (r) r(value);
+  }
+  $('sheetScrim').addEventListener('click', function(e){ if (e.target === this) closeSheet(null); });
+
+  /* ---------- capture form ---------- */
+  var form = {kind:null, toward:null, tone:null, season:null};
+  var counselIdx = 0;
+  var kindBtns = document.querySelectorAll('.kind');
+  Array.prototype.forEach.call(kindBtns, function(b){
+    b.addEventListener('click', function(){
+      var k = b.getAttribute('data-kind');
+      form.kind = (form.kind === k) ? null : k;
+      counselIdx = 0;
+      renderForm();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.seg[data-field]'), function(seg){
+    var f = seg.getAttribute('data-field');
+    Array.prototype.forEach.call(seg.querySelectorAll('button'), function(b){
+      b.addEventListener('click', function(){
+        var v = b.getAttribute('data-v');
+        form[f] = (form[f] === v) ? null : v;
+        renderForm();
+      });
+    });
+  });
+  $('counsel').addEventListener('click', function(){ counselIdx++; renderCounsel(); });
+  $('nowBtn').addEventListener('click', function(){ $('when').value = toLocalInput(new Date()); });
+  $('before').addEventListener('input', renderCounter);
+
+  function renderCounter(){
+    var n = $('before').value.length, c = $('counter');
+    c.textContent = n + ' / 280';
+    c.classList.toggle('near', n >= 260);
+  }
+  function renderCounsel(){
+    var list = COUNSEL[form.kind || 'none'];
+    var item = list[counselIdx % list.length];
+    var b = $('counsel');
+    clear(b);
+    b.appendChild(document.createTextNode(item[1]));
+    b.appendChild(el('span', null, item[0] + (list.length > 1 ? '  \u00b7  tap for more counsel' : '')));
+  }
+  function renderForm(){
+    Array.prototype.forEach.call(kindBtns, function(b){
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-kind') === form.kind));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.seg[data-field]'), function(seg){
+      var f = seg.getAttribute('data-field');
+      Array.prototype.forEach.call(seg.querySelectorAll('button'), function(b){
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === form[f]));
+      });
+    });
+    var des = form.kind === 'desolation';
+    $('rule5').classList.toggle('alert', des);
+    $('r5h').textContent = des ? 'You marked desolation. Rule 5 applies now.' : 'Rule 5: in desolation, make no change';
+    $('r5warn').classList.toggle('show', des && form.season === 'decide');
+    $('saveBtn').disabled = !form.kind;
+    renderCounsel();
+  }
+
+  $('saveBtn').addEventListener('click', function(){
+    if (!form.kind) return;
+    var d = fromLocalInput($('when').value) || new Date();
+    var e = {
+      id: makeId(), ts: d.getTime(), kind: form.kind,
+      before: $('before').value.slice(0,280).trim(),
+      toward: form.toward, tone: form.tone, season: form.season
+    };
+    state.entries.push(e);
+    writeStore();
+    viewDay = startOfDay(d);
+    form = {kind:null, toward:null, tone:null, season:null};
+    counselIdx = 0;
+    $('before').value = '';
+    $('when').value = toLocalInput(new Date());
+    renderCounter();
+    renderForm();
+    renderDay();
+    toast(storageOk ? 'Saved to your journal' : 'Saved for this session only (storage unavailable)');
+  });
+
+  /* ---------- day view ---------- */
+  var viewDay = startOfDay(new Date());
+  $('prevBtn').addEventListener('click', function(){ viewDay = addDays(viewDay, -1); renderDay(); });
+  $('nextBtn').addEventListener('click', function(){ viewDay = addDays(viewDay, 1); renderDay(); });
+  $('todayBtn').addEventListener('click', function(){ viewDay = startOfDay(new Date()); renderDay(); });
+
+  function dayEntries(day){
+    var a = day.getTime(), b = addDays(day, 1).getTime();
+    return state.entries.filter(function(e){ return e.ts >= a && e.ts < b; })
+      .sort(function(x, y){ return x.ts - y.ts || (x.id < y.id ? -1 : 1); });
+  }
+  function minsOf(ts, day){ return (ts - day.getTime()) / 60000; }
+
+  function seg(cls, dur, label, aria){
+    var s = el('div', cls, label);
+    s.style.flexGrow = String(Math.max(dur, 0.0001));
+    if (aria) s.title = aria;
+    return s;
+  }
+
+  function renderDay(){
+    var today = startOfDay(new Date());
+    var isToday = sameDay(viewDay, today);
+    $('dayLabel').textContent = isToday ? 'Today, ' + fmtDay(viewDay).split(', ')[1] : fmtDay(viewDay);
+    $('todayBtn').disabled = isToday;
+
+    var items = dayEntries(viewDay);
+    var rib = $('ribbon'), ticks = $('ticks');
+    clear(rib); clear(ticks);
+
+    var ws = 6 * 60, we = 22 * 60;
+    if (items.length){
+      var f = minsOf(items[0].ts, viewDay), l = minsOf(items[items.length-1].ts, viewDay);
+      ws = Math.min(ws, Math.floor(f / 60) * 60);
+      we = Math.max(we, Math.min(1440, Math.ceil((l + 30) / 60) * 60));
+    }
+    var span = we - ws;
+    var nowM = isToday ? minsOf(Date.now(), viewDay) : null;
+    var desc = [];
+
+    if (!items.length){
+      rib.appendChild(seg('seg-n', span));
+    } else {
+      var first = minsOf(items[0].ts, viewDay);
+      if (first > ws) rib.appendChild(seg('seg-n', first - ws));
+      for (var i = 0; i < items.length; i++){
+        var e = items[i], s = minsOf(e.ts, viewDay), end;
+        if (i + 1 < items.length) end = minsOf(items[i+1].ts, viewDay);
+        else if (isToday && nowM >= s) end = Math.min(nowM, we);
+        else if (isToday && nowM < s) end = s;
+        else end = we;
+        var isC = e.kind === 'consolation';
+        var word = isC ? 'Consolation' : 'Desolation';
+        rib.appendChild(seg(isC ? 'seg-c' : 'seg-d', Math.max(end - s, 0), isC ? 'C' : 'D', word + ' from ' + fmtTime(new Date(e.ts))));
+        desc.push(word + ' at ' + fmtTime(new Date(e.ts)));
+      }
+      var last = items[items.length-1], lastS = minsOf(last.ts, viewDay);
+      var filled = isToday ? Math.max(Math.min(nowM, we), lastS) : we;
+      if (filled < we) rib.appendChild(seg('seg-n', we - filled));
+    }
+    rib.setAttribute('aria-label', items.length ? 'Timeline: ' + desc.join(', ') : 'Timeline: nothing logged');
+
+    var hrs = span / 60, step = hrs > 12 ? 4 : 2;
+    for (var h = ws / 60; h <= we / 60; h++){
+      var pct = ((h * 60 - ws) / span) * 100;
+      var major = ((h - ws / 60) % step) === 0 || h === we / 60;
+      var t = el('div', 'tick' + (major ? ' major' : ''));
+      t.style.left = pct + '%';
+      ticks.appendChild(t);
+      var isFirst = h === ws / 60, isLast = h === we / 60;
+      if (major && (isLast || (we / 60 - h) >= step / 2 || isFirst)){
+        var lab = el('div', 'tlab' + (isFirst ? ' first' : '') + (isLast ? ' last' : ''), hourLabel(h));
+        lab.style.left = pct + '%';
+        ticks.appendChild(lab);
+      }
+    }
+
+    $('emptyMsg').style.display = items.length ? 'none' : '';
+    var list = $('list');
+    clear(list);
+    items.forEach(function(e){
+      var isC = e.kind === 'consolation';
+      var li = el('li', 'entry ' + (isC ? 'c' : 'd'));
+      var body = el('div', 'body');
+      var meta = el('div', 'meta');
+      meta.appendChild(el('strong', null, fmtTime(new Date(e.ts))));
+      meta.appendChild(el('span', 'badge ' + (isC ? 'c' : 'd'), isC ? 'C  Consolation' : 'D  Desolation'));
+      body.appendChild(meta);
+      body.appendChild(el('p', 'txt' + (e.before ? '' : ' none'), e.before || 'Nothing noted about what came before.'));
+      var chips = el('div', 'chips');
+      ['toward','tone','season'].forEach(function(f){ if (e[f]) chips.appendChild(el('span', 'chip', FIELDS[f][e[f]])); });
+      if (!isC && e.season === 'decide') chips.appendChild(el('span', 'chip caution', 'Rule 5: hold steady'));
+      if (chips.firstChild) body.appendChild(chips);
+      li.appendChild(body);
+      var del = el('button', 'del', '\u00d7');
+      del.type = 'button';
+      del.setAttribute('aria-label', 'Delete the ' + fmtTime(new Date(e.ts)) + ' entry');
+      del.addEventListener('click', function(){
+        ask('Delete this entry?', 'The ' + fmtTime(new Date(e.ts)) + ' ' + e.kind + ' entry will be removed from this device.', [
+          {label:'Delete entry', value:'yes', style:'danger'},
+          {label:'Keep it', value:null}
+        ]).then(function(v){
+          if (v !== 'yes') return;
+          state.entries = state.entries.filter(function(x){ return x.id !== e.id; });
+          writeStore(); renderDay(); toast('Entry deleted');
+        });
+      });
+      li.appendChild(del);
+      list.appendChild(li);
+    });
+  }
+
+  /* ---------- gear modal ---------- */
+  var gearReturn = null;
+  function openGear(){
+    gearReturn = document.activeElement;
+    var n = state.entries.length;
+    $('countLine').textContent = n + (n === 1 ? ' entry' : ' entries') + ' saved on this device' + (storageOk ? '.' : ' for this session only.');
+    $('gearScrim').classList.add('open');
+    $('gearClose').focus();
+  }
+  function closeGear(){
+    $('gearScrim').classList.remove('open');
+    if (gearReturn && gearReturn.focus) { try { gearReturn.focus(); } catch (e) {} }
+  }
+  $('gearBtn').addEventListener('click', openGear);
+  $('gearClose').addEventListener('click', closeGear);
+  $('gearScrim').addEventListener('click', function(e){ if (e.target === this) closeGear(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    if ($('sheetScrim').classList.contains('open')) closeSheet(null);
+    else if ($('gearScrim').classList.contains('open')) closeGear();
+  });
+
+  $('exportBtn').addEventListener('click', function(){
+    var d = new Date();
+    var name = 'consolation-journal-' + d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + '.json';
+    var data = JSON.stringify({v:1, app:'appaday-162-consolation-journal', exported:d.toISOString(), entries:state.entries}, null, 2);
+    var url = URL.createObjectURL(new Blob([data], {type:'application/json'}));
+    var a = el('a'); a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+    toast('Exported ' + state.entries.length + ' entries');
+  });
+
+  $('importBtn').addEventListener('click', function(){ $('importFile').value = ''; $('importFile').click(); });
+  $('importFile').addEventListener('change', function(){
+    var file = this.files && this.files[0];
+    if (!file) return;
+    var rd = new FileReader();
+    rd.onload = function(){ importText(String(rd.result || '')); };
+    rd.onerror = function(){ toast('Could not read that file'); };
+    rd.readAsText(file);
+  });
+
+  function importText(text){
+    var parsed;
+    try { parsed = JSON.parse(text); } catch (e) { toast('That file is not valid JSON'); return Promise.resolve(false); }
+    var clean = sanitize(parsed);
+    if (!clean || !clean.entries.length){ toast('No journal entries found in that file'); return Promise.resolve(false); }
+    var n = clean.entries.length;
+    var pick = state.entries.length
+      ? ask('Import ' + n + (n === 1 ? ' entry' : ' entries') + '?', 'Merge keeps your current ' + state.entries.length + ' and adds any new ones. Replace swaps everything for the file.', [
+          {label:'Merge with my journal', value:'merge', style:'primary'},
+          {label:'Replace my journal', value:'replace', style:'danger'},
+          {label:'Cancel', value:null}
+        ])
+      : Promise.resolve('replace');
+    return pick.then(function(mode){
+      if (!mode) return false;
+      if (mode === 'replace') state = clean;
+      else {
+        var have = {}; state.entries.forEach(function(e){ have[e.id] = 1; });
+        var added = 0;
+        clean.entries.forEach(function(e){ if (!have[e.id]){ state.entries.push(e); added++; } });
+        n = added;
+      }
+      writeStore(); renderDay(); closeGear();
+      toast(mode === 'replace' ? 'Journal replaced with ' + clean.entries.length + ' entries' : 'Merged ' + n + ' new entries');
+      return true;
+    });
+  }
+
+  $('clearBtn').addEventListener('click', function(){
+    ask('Clear the whole journal?', 'All ' + state.entries.length + ' entries will be erased from this device. Export first if you want a copy.', [
+      {label:'Erase everything', value:'yes', style:'danger'},
+      {label:'Cancel', value:null}
+    ]).then(function(v){
+      if (v !== 'yes') return;
+      state = {v:1, entries:[]};
+      writeStore(); renderDay(); closeGear(); toast('Journal cleared');
+    });
+  });
+
+  /* ---------- init ---------- */
+  $('when').value = toLocalInput(new Date());
+  renderCounter();
+  renderForm();
+  renderDay();
+  setInterval(function(){ if (sameDay(viewDay, new Date())) renderDay(); }, 60000);
+
+})();
+</script>
+</body>
+</html>
